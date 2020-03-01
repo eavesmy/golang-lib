@@ -1,14 +1,23 @@
 package crypto
 
-import "crypto/rc4"
+import (
+	"crypto/rc4"
+	"encoding/hex"
+)
 
 func Rc4(txt string, key string) string {
+
+	isEncrypt := false
 
 	if txt == "" || key == "" {
 		return ""
 	}
+	src, err := hex.DecodeString(txt)
+	if err != nil {
+		isEncrypt = true
+		src = []byte(txt)
+	}
 
-	src := []byte(txt)
 	k := []byte(key)
 
 	c, _ := rc4.NewCipher(k)
@@ -18,5 +27,10 @@ func Rc4(txt string, key string) string {
 
 	defer c.Reset()
 
-	return string(r)
+	if isEncrypt {
+		return hex.EncodeToString(r)
+	} else {
+		return string(r)
+	}
+
 }
