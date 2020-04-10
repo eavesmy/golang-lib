@@ -1,6 +1,7 @@
 package gtype
 
 import "strconv"
+import "fmt"
 
 // int64 to float64
 func Int642Float64(i int64) float64 {
@@ -36,4 +37,8 @@ func String2Int64(str string) int64 {
 func String2Int(str string) int {
 	i, _ := strconv.Atoi(str)
 	return i
+}
+
+func Int2String(num int)string{
+    return fmt.Sprintf("%d",num)
 }
