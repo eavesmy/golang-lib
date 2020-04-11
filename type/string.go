@@ -18,7 +18,7 @@ func Reverse(str string) string {
 // Get string with range
 func Slice(str string,index,end int) string {
     arr := []rune(str)
-    return string(arr[index,end])
+    return string(arr[index:end])
 }
 
 // 获取字符数量
