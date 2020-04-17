@@ -1,10 +1,10 @@
 package crypto
 
 import (
-	"crypto"
 	"crypto/rand"
-	"crypto/rsa"
 	"crypto/x509"
+    "errors"
+    "crypto/rsa"
 	"encoding/pem"
 )
 
@@ -13,14 +13,14 @@ type Rsa struct {
 	priKey []byte
 }
 
-func (rsa *Rsa) SetKey(pubKey, priKey []byte) {
-	rsa.pubKey = pubKey
-	rsa.priKey = priKey
+func (r *Rsa) SetKey(pubKey, priKey []byte) {
+	r.pubKey = pubKey
+	r.priKey = priKey
 }
 
 // 加密
-func (rsa *Rsa) RsaEncrypt(origData []byte) ([]byte, error) {
-	block, _ := pem.Decode(rsa.pubKey)
+func (r *Rsa) RsaEncrypt(origData []byte) ([]byte, error) {
+	block, _ := pem.Decode(r.pubKey)
 	if block == nil {
 		return nil, errors.New("public key error")
 	}
@@ -33,8 +33,8 @@ func (rsa *Rsa) RsaEncrypt(origData []byte) ([]byte, error) {
 }
 
 // 解密
-func (rsa *Rsa) RsaDecrypt(ciphertext []byte) ([]byte, error) {
-	block, _ := pem.Decode(rsa.priKey)
+func (r *Rsa) RsaDecrypt(ciphertext []byte) ([]byte, error) {
+	block, _ := pem.Decode(r.priKey)
 	if block == nil {
 		return nil, errors.New("private key error!")
 	}
