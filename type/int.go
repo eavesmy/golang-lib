@@ -39,6 +39,11 @@ func String2Int(str string) int {
 	return i
 }
 
+func String2Float64(str string) float64 {
+    i,_:=strconv.ParseFloat(str,64)
+    return i
+}
+
 func Int2String(num int)string{
     return fmt.Sprintf("%d",num)
 }
