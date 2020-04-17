@@ -44,6 +44,10 @@ func String2Float64(str string) float64 {
     return i
 }
 
+func Float642String(i float64) string {
+   return strconv.FormatFloat(i,'E',-1,64)
+}
+
 func Int2String(num int)string{
     return fmt.Sprintf("%d",num)
 }
