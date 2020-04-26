@@ -40,14 +40,19 @@ func String2Int(str string) int {
 }
 
 func String2Float64(str string) float64 {
-    i,_:=strconv.ParseFloat(str,64)
-    return i
+	i, _ := strconv.ParseFloat(str, 64)
+	return i
 }
 
-func Float642String(i float64) string {
-   return strconv.FormatFloat(i,'E',-1,64)
+func Float642String(i float64, positions ...int) string {
+	position := 6 // 默认6位
+	if len(positions) > 0 {
+		position = positions[0]
+	}
+
+	return fmt.Sprintf("%."+Int2String(position)+"f", i)
 }
 
-func Int2String(num int)string{
-    return fmt.Sprintf("%d",num)
+func Int2String(num int) string {
+	return fmt.Sprintf("%d", num)
 }
