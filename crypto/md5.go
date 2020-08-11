@@ -31,3 +31,19 @@ func md5_32(txt string, crypted []byte) string {
 
 	return hex.EncodeToString(cipherStr)
 }
+
+func md5_32_bytes(txt []byte, crypted []byte) string {
+	h := md5.New()
+	h.Write(txt)
+	cipherStr := h.Sum(crypted)
+
+	return hex.EncodeToString(cipherStr)
+}
+
+func Md5Bytes(txt []byte, crypted ...[]byte) string {
+	var c []byte
+	if len(crypted) != 0 {
+		c = crypted[0]
+	}
+	return md5_32_bytes(txt, c)
+}
