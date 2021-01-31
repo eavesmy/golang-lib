@@ -25,3 +25,8 @@ func Slice(str string, index, end int) string {
 func Length(str string) int {
 	return len([]rune(str))
 }
+
+func Index(str string, index int) string {
+	arr := []rune(str)
+	return string(arr[index])
+}

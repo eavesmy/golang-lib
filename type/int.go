@@ -14,6 +14,10 @@ func Float642Int64(i float64) int64 {
 	return int64(i)
 }
 
+func Int2Float64(i int) float64 {
+	return float64(i)
+}
+
 func Int2Int64(i int) int64 {
 	return int64(i)
 }
