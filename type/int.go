@@ -1,7 +1,9 @@
 package gtype
 
-import "strconv"
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 // int64 to float64
 func Int642Float64(i int64) float64 {
@@ -41,6 +43,11 @@ func String2Int64(str string) int64 {
 func String2Int(str string) int {
 	i, _ := strconv.Atoi(str)
 	return i
+}
+
+func String2Int32(str string) int32 {
+	num, _ := strconv.ParseInt(str, 10, 32)
+	return int32(num)
 }
 
 func String2Float64(str string) float64 {
