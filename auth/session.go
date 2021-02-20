@@ -2,9 +2,10 @@ package auth
 
 import (
 	"errors"
-	"github.com/go-http-utils/cookie"
-	"github.com/satori/go.uuid"
 	"time"
+
+	"github.com/go-http-utils/cookie"
+	uuid "github.com/satori/go.uuid"
 )
 
 type Session struct {
