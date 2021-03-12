@@ -28,3 +28,8 @@ func IsIdCard(idCard string) bool {
 	res, _ := regexp.Match("^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$|^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$", []byte(idCard))
 	return res
 }
+
+func IsChinaName(name string) bool {
+	res, _ := regexp.Match("^[\u4E00-\u9FA5]{2,4}$", []byte(name))
+	return res
+}
