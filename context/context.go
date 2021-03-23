@@ -1,7 +1,9 @@
 package context
 
-import "context"
-import "time"
+import (
+	"context"
+	"time"
+)
 
 type Ctx struct {
 	ctx    context.Context
@@ -36,4 +38,28 @@ func (c *Ctx) Cancel() {
 
 func (c *Ctx) SetTimeout(t time.Duration) {
 	c.ctx, c.cancel = context.WithTimeout(c.ctx, t)
+}
+
+func (c *Ctx) Background() *Ctx {
+	return New()
+}
+
+func (c *Ctx) TODO() *Ctx {
+	return New()
+}
+
+func (c *Ctx) Deadline() (deadline time.Time, ok bool) {
+	return
+}
+
+func (c *Ctx) Done() <-chan struct{} {
+	return nil
+}
+
+func (c *Ctx) Err() error {
+	return nil
+}
+
+func (c *Ctx) Value(key interface{}) interface{} {
+	return nil
 }

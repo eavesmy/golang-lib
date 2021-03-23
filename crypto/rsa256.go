@@ -2,10 +2,10 @@ package crypto
 
 import (
 	"crypto/rand"
+	"crypto/rsa"
 	"crypto/x509"
-    "errors"
-    "crypto/rsa"
 	"encoding/pem"
+	"errors"
 )
 
 type Rsa struct {
