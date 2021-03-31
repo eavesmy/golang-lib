@@ -33,3 +33,9 @@ func IsChinaName(name string) bool {
 	res, _ := regexp.Match("^[\u4E00-\u9FA5]{2,4}$", []byte(name))
 	return res
 }
+
+// 支持中英数字及下划线和小数点
+func IsNickname(name string) bool {
+	res, _ := regexp.Match("^[\\.a-zA-Z0-9_\u4e00-\u9fa5]+$", []byte(name))
+	return res
+}
