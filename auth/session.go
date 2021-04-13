@@ -34,7 +34,7 @@ func NewSession(options ...*cookie.Options) *Session { // maxAge unit: second. 0
 		}
 	}
 
-	uid, _ := uuid.NewV4()
+	uid := uuid.NewV4()
 
 	s := &Session{
 		Id:      uid.String(),
