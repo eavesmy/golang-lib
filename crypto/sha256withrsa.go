@@ -1,5 +1,19 @@
 package crypto
 
+import (
+	"crypto"
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/sha256"
+	"crypto/x509"
+	"encoding/base64"
+	"encoding/pem"
+	"fmt"
+	"strings"
+
+	"github.com/fwhezfwhez/errorx"
+)
+
 func Sha256WithRsa(privateRaw string, msg string) (string, error) {
 	privateRaw = strings.Trim(privateRaw, "\n")
 	if !strings.HasPrefix(privateRaw, "-----BEGIN RSA PRIVATE KEY-----") {
@@ -59,6 +73,3 @@ func genPriKey(privateKey []byte, privateKeyType int64) (*rsa.PrivateKey, error)
 	}
 	return priKey, nil
 }
-————————————————
-版权声明：本文为CSDN博主「fwhezfwhez」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/fwhezfwhez/article/details/113120106
