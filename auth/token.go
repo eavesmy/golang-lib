@@ -41,12 +41,14 @@ func GenToken(uid string) string {
 
 	token := uid + "|" + t + "|" + sign
 	// token = base64.StdEncoding.EncodeToString([]byte(token))
-	return crypto.Rc4(token, KEY)
+
+	return token
+	// return crypto.Rc4(token, KEY)
 }
 
 func ParseToken(token string) (uid, t, sign string) {
 
-	token = crypto.Rc4(token, KEY)
+	// token = crypto.Rc4(token, KEY)
 	// temp_data, _ := base64.StdEncoding.DecodeString(token)
 	// token = string(temp_data)
 	arr := strings.Split(token, "|")
