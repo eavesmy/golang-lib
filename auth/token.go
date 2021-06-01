@@ -1,11 +1,10 @@
 package auth
+
 import (
-	"encoding/json"
 	"fmt"
 	"time"
+   jwt "github.com/dgrijalva/jwt-go"
 
-	"github.com/eavesmy/golang-lib/crypto"
-	gtype "github.com/eavesmy/golang-lib/type"
 )
 
 var KEY = "zhongnanhai"
@@ -19,41 +18,37 @@ sign: rc4(user_id,uid=user_id&t=timestamp)
 
 */
 
-type Endata struct {
-	Uid        string
-	timed      string
+
+type Endata struct{
+
+	Uid string
+	timed string
 	RandString string
 }
 
 func GenToken(uid string) string {
-
-	t := gtype.Int642String(time.Now().Unix())
-
-	sign_data := Endata{uid, t, "rand_data"}
-	en_data, _ := json.Marshal(sign_data)
-	token := crypto.Base64EnCrypetcode(KEY, string(en_data))
+	at := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"uid":  uid,
+		"exp":  time.Now().Add(time.Minute * 15).Unix(),
+	})
+	token, err := at.SignedString([]byte(KEY))
+	if err != nil {
+		return ""
+	}
 	return token
-	// return crypto.Rc4(token, KEY)
 }
 
 func ParseToken(token string) (uid, t, sign string) {
 
-	str, err := crypto.Base64DeCryptcode(KEY, token)
+	claim, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+		return []byte(KEY), nil
+	})
 	if err != nil {
+		fmt.Println("token->err",err)
 		return
 	}
-	data := new(Endata)
-	err = json.Unmarshal([]byte(str), &data)
-	if err != nil {
-		fmt.Println("token Error ", err)
-		return
-	}
-	if data.Uid == "" {
-		return
-	}
-
-	uid = data.Uid
-	t = data.timed
+	uid = claim.Claims.(jwt.MapClaims)["uid"].(string)
+	t = ""
 	sign = GenToken(uid)
 	return
 }
