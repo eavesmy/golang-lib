@@ -3,8 +3,7 @@ package auth
 import (
 	"fmt"
 	"time"
-   jwt "github.com/dgrijalva/jwt-go"
-
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
 var KEY = "zhongnanhai"
@@ -18,18 +17,16 @@ sign: rc4(user_id,uid=user_id&t=timestamp)
 
 */
 
-
-type Endata struct{
-
-	Uid string
-	timed string
+type Endata struct {
+	Uid        string
+	timed      string
 	RandString string
 }
 
 func GenToken(uid string) string {
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"uid":  uid,
-		"exp":  time.Now().Add(time.Minute * 15).Unix(),
+		"uid": uid,
+		"exp": time.Now().Add(time.Hour * 5000).Unix(),
 	})
 	token, err := at.SignedString([]byte(KEY))
 	if err != nil {
@@ -44,7 +41,7 @@ func ParseToken(token string) (uid, t, sign string) {
 		return []byte(KEY), nil
 	})
 	if err != nil {
-		fmt.Println("token->err",err)
+		fmt.Println("token->err", err)
 		return
 	}
 	uid = claim.Claims.(jwt.MapClaims)["uid"].(string)
