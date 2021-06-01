@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7995932e-208d-4e5b-ae15-54bb99829067" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/crypto/recrypt_base64.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/auth/token.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crypto/rc4.go" beforeDir="false" afterPath="$PROJECT_DIR$/crypto/rc4.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crypto/recrypt_base64.go" beforeDir="false" afterPath="$PROJECT_DIR$/crypto/recrypt_base64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +34,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -40,6 +42,12 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GOPATH\src\golang-lib\auth" />
+    </key>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -58,6 +66,20 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-    <proxy>direct</proxy>
+    <proxy>https://mirrors.aliyun.com/goproxy/</proxy>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1622521162160">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1622521162160" />
+    <state x="484" y="67" key="RollbackChangesDialog" timestamp="1622526950838">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="484" y="67" key="RollbackChangesDialog/0.0.1280.689@0.0.1280.689" timestamp="1622526950838" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1622527153426">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.689@0.0.1280.689" timestamp="1622527153426" />
   </component>
 </project>
