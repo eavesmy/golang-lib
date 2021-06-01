@@ -1,46 +1,56 @@
 package crypto
 
 import (
+	"crypto/md5"
 	"crypto/rand"
-	"crypto/rsa"
-	"crypto/x509"
-	"encoding/pem"
-	"errors"
+	"encoding/base64"
+	"encoding/hex"
+	"io"
+	"strings"
 )
 
-// 公钥生成
-//openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
+const (
+	//BASE64字符表,不要有重复
+	base64Table        = "<>:;9,./?~!@#$CDVWX%^&*ABYZabcghijklmnopqrstuvwxyz01EFGHIJKLMNO="
+//	hashFunctionHeader = "tianshen.eavesemy.hhh"
+	hashFunctionFooter = "09.O25.O20.78"
+)
 
-// 加密
-func RsaEncrypt(origData []byte, publicKey []byte) ([]byte, error) {
-	//解密pem格式的公钥
-	block, _ := pem.Decode(publicKey)
-	if block == nil {
-		return nil, errors.New("public key error")
-	}
-	// 解析公钥
-	pubInterface, err := x509.ParsePKIXPublicKey(block.Bytes)
-	if err != nil {
-		return nil, err
-	}
-	// 类型断言
-	pub := pubInterface.(*rsa.PublicKey)
-	//加密
-	return rsa.EncryptPKCS1v15(rand.Reader, pub, origData)
+/**
+ * 对一个字符串进行MD5加密,不可解密
+ */
+func GetMd5String(s string) string {
+	h := md5.New()
+	h.Write([]byte(s + "zhifeiya")) //使用zhifeiya名字做散列值，设定后不要变
+	return hex.EncodeToString(h.Sum(nil))
 }
 
-// 解密
-func RsaDecrypt(ciphertext []byte, privateKey []byte) ([]byte, error) {
-	//解密
-	block, _ := pem.Decode(privateKey)
-	if block == nil {
-		return nil, errors.New("private key error!")
+/**
+ * 获取一个Guid值
+ */
+func GetGuid() string {
+	b := make([]byte, 48)
+	if _, err := io.ReadFull(rand.Reader, b); err != nil {
+		return ""
 	}
-	//解析PKCS1格式的私钥
-	priv, err := x509.ParsePKCS1PrivateKey(block.Bytes)
-	if err != nil {
-		return nil, err
-	}
-	// 解密
-	return rsa.DecryptPKCS1v15(rand.Reader, priv, ciphertext)
+	return GetMd5String(base64.URLEncoding.EncodeToString(b))
+}
+
+var coder = base64.NewEncoding(base64Table)
+
+/**
+ * base64加密
+ */
+func Base64EnCrypetcode(hashFunctionHeader string,str string) string {
+	var src []byte = []byte(hashFunctionHeader + str + hashFunctionFooter)
+	return string([]byte(coder.EncodeToString(src)))
+}
+
+/**
+ * base64解密
+ */
+func Base64DeCryptcode(hashFunctionHeader string,str string) (string, error) {
+	var src []byte = []byte(str)
+	by, err := coder.DecodeString(string(src))
+	return strings.Replace(strings.Replace(string(by), hashFunctionHeader, "", -1), hashFunctionFooter, "", -1), err
 }
