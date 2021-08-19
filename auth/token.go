@@ -1,11 +1,9 @@
 package auth
 
 import (
-	"strings"
+	"fmt"
 	"time"
-
-	"github.com/eavesmy/golang-lib/crypto"
-	gtype "github.com/eavesmy/golang-lib/type"
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
 var KEY = "zhongnanhai"
@@ -19,32 +17,35 @@ sign: rc4(user_id,uid=user_id&t=timestamp)
 
 */
 
-
+type Endata struct {
+	Uid        string
+	timed      string
+	RandString string
+}
 
 func GenToken(uid string) string {
-
-	t := gtype.Int642String(time.Now().Unix())
-	sign := uid + "|" + t + "|" + "data_zhanwei"
-	token := crypto.Base64EnCrypetcode(KEY, sign)
-
+	at := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"uid": uid,
+		"exp": time.Now().Add(time.Hour * 5000).Unix(),
+	})
+	token, err := at.SignedString([]byte(KEY))
+	if err != nil {
+		return ""
+	}
 	return token
-	// return crypto.Rc4(token, KEY)
 }
 
 func ParseToken(token string) (uid, t, sign string) {
 
-	str,err := crypto.Base64DeCryptcode(KEY, token)
-	if err!=nil {
+	claim, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+		return []byte(KEY), nil
+	})
+	if err != nil {
+		fmt.Println("token->err", err)
 		return
 	}
-	arr := strings.Split(str, "|")
-
-	if len(arr) < 3 {
-		return
-	}
-
-	uid = arr[0]
-	t = arr[1]
+	uid = claim.Claims.(jwt.MapClaims)["uid"].(string)
+	t = ""
 	sign = GenToken(uid)
 	return
 }

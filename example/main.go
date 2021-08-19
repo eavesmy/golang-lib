@@ -7,10 +7,12 @@ import (
 
 func main ()  {
 
+	data:= auth.GenToken("1111")
 
-	token := auth.GenToken("u9822")
-	uid,t,sign := auth.ParseToken(token)
+	aa,_,_ := auth.ParseToken(data)
 
-	fmt.Println(uid,t,sign )
+	fmt.Println(data)
+	fmt.Println(aa)
+
 
 }

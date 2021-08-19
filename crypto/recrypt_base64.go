@@ -1,3 +1,11 @@
+/*
+ * @Author: jjc
+ * @Date: 2021-06-01 12:53:39
+ * @LastEditTime: 2021-06-01 12:59:01
+ * @LastEditors: Please set LastEditors
+ * @Description:
+ * @FilePath: /tianshen/root/go/pkg/mod/github.com/eavesmy/golang-lib@v0.3.5/crypto/recrypt_base64.go
+ */
 package crypto
 
 import (
@@ -11,8 +19,8 @@ import (
 
 const (
 	//BASE64字符表,不要有重复
-	base64Table        = "<>:;9,./?~!@#$CDVWX%^&*ABYZabcghijklmnopqrstuvwxyz01EFGHIJKLMNO="
-//	hashFunctionHeader = "tianshen.eavesemy.hhh"
+	base64Table = "<>:;9,7234!@#$CDVWX%5&*ABYZabcghijklmnopqrstuvwxyz01EFGHIJKLMNO="
+	//	hashFunctionHeader = "tianshen.eavesemy.hhh"
 	hashFunctionFooter = "09.O25.O20.78"
 )
 
@@ -41,7 +49,7 @@ var coder = base64.NewEncoding(base64Table)
 /**
  * base64加密
  */
-func Base64EnCrypetcode(hashFunctionHeader string,str string) string {
+func Base64EnCrypetcode(hashFunctionHeader string, str string) string {
 	var src []byte = []byte(hashFunctionHeader + str + hashFunctionFooter)
 	return string([]byte(coder.EncodeToString(src)))
 }
@@ -49,7 +57,7 @@ func Base64EnCrypetcode(hashFunctionHeader string,str string) string {
 /**
  * base64解密
  */
-func Base64DeCryptcode(hashFunctionHeader string,str string) (string, error) {
+func Base64DeCryptcode(hashFunctionHeader string, str string) (string, error) {
 	var src []byte = []byte(str)
 	by, err := coder.DecodeString(string(src))
 	return strings.Replace(strings.Replace(string(by), hashFunctionHeader, "", -1), hashFunctionFooter, "", -1), err
