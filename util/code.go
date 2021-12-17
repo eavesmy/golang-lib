@@ -5,7 +5,7 @@
 # Created Time: 五 12/17 10:20:46 2021
 */
 
-package code
+package util
 
 /**
  * 随机字符串
@@ -42,7 +42,7 @@ const PRIME2 = 11
  * @param id 唯一的id. 支持的最大值为: (32^7 - {@link #SLAT})/{@link #PRIME1} = 11452834602
  * @return
  */
-func Gen(id int64,length int) string {
+func Gen(id int64, length int) string {
 	return _gen(id, length)
 }
 
@@ -57,7 +57,7 @@ func _gen(id int64, length int) string {
 	// 补位
 	id = id*PRIME1 + SLAT
 	//将 id 转换成32进制的值
-	b := make([]int64,length)
+	b := make([]int64, length)
 	// 32进制数
 	b[0] = id
 	for i := 0; i < length-1; i++ {
@@ -73,7 +73,7 @@ func _gen(id int64, length int) string {
 	b[length-1] = tmp * PRIME1 % CHARS_LENGTH
 
 	// 进行混淆
-	codeIndexArray := make([]int64,length)
+	codeIndexArray := make([]int64, length)
 	str := []rune{}
 	for i := 0; i < length; i++ {
 		codeIndexArray[i] = b[i*PRIME2%length]
@@ -93,12 +93,12 @@ func _gen(id int64, length int) string {
  * @param code 邀请码
  * @return id
  */
-func Decode(code string,length int) int64 {
+func Decode(code string, length int) int64 {
 	if len(code) != length {
 		return -1
 	}
 	// 将字符还原成对应数字
-	a := make([]int64,length)
+	a := make([]int64, length)
 	for i := 0; i < length; i++ {
 		c := rune(code[i])
 		index := findIndex(c)
@@ -108,7 +108,7 @@ func Decode(code string,length int) int64 {
 		}
 		a[i*PRIME2%length] = int64(index)
 	}
-	b := make([]int64,length)
+	b := make([]int64, length)
 	for i := length - 2; i >= 0; i-- {
 		b[i] = (a[i] - a[0]*int64(i) + CHARS_LENGTH*int64(i)) % CHARS_LENGTH
 	}
