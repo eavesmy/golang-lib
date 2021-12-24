@@ -47,7 +47,7 @@ func ParseToken(token string) (uid string, t int64, sign string) {
 	}
 	uid = claim.Claims.(jwt.MapClaims)["uid"].(string)
 	f_t := claim.Claims.(jwt.MapClaims)["exp"].(float64)
-	t := int64(f_t)
+	t = int64(f_t)
 	sign = GenToken(uid)
 	return
 }
