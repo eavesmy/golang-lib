@@ -3,6 +3,7 @@ package auth
 import (
 	"fmt"
 	"time"
+
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
@@ -26,7 +27,7 @@ type Endata struct {
 func GenToken(uid string) string {
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"uid": uid,
-		"exp": time.Now().Add(time.Hour * 5000).Unix(),
+		"exp": time.Now().Add(time.Hour * 1).Unix(),
 	})
 	token, err := at.SignedString([]byte(KEY))
 	if err != nil {
