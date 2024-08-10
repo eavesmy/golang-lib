@@ -19,7 +19,7 @@ func Md5_16(txt string, crypted ...string) string {
 		c = []byte(crypted[0])
 	}
 	txt = md5_32(txt, c)
-	ret := txt[0:16] + txt[17:32]
+	ret := txt[8:24]
 	return ret
 }
 
